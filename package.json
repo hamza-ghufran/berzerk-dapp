@@ -11,6 +11,7 @@
     "@types/react": "^17.0.20",
     "@types/react-dom": "^17.0.9",
     "dynamic-class-list": "^2.0.1",
+    "ethers": "^5.5.3",
     "evergreen-ui": "^6.7.1",
     "mobx": "^6.3.13",
     "mobx-react": "^7.2.1",

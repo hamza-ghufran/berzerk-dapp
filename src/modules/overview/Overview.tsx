@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { ConnectWallet } from 'modules/connect-wallet'
+import { Action } from 'commons/components'
 
 import Stats from './stats/Stats'
 import Banner from './banner/Banner'
@@ -17,7 +17,7 @@ function Overview() {
             <Statement />
           </div>
           <div className={styles.action}>
-            <ConnectWallet />
+            <Action />
           </div>
         </section>
         <section className={styles.section__banner}>
