@@ -7,16 +7,16 @@ import styles from './styles.module.css'
 
 function Overview() {
   return <div className={styles.root}>
-    <section className={styles.section__c1}>
-      <div>
-        <Statement />
+    <div className={styles.content}>
+      <div className={styles.content__inline}>
+        <section>
+          <Statement />
+        </section>
+        <section>
+          <Banner />
+        </section>
       </div>
-      <div>
-        <Banner />
-      </div>
-    </section>
-    <section className={styles.section__c2}>
-    </section>
+    </div>
   </div>
 }
 

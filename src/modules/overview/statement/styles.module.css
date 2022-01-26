@@ -1,0 +1,12 @@
+.root {
+  display: flex;
+  flex-direction: column;
+}
+
+.text__main {
+  margin: var(--space-stack-m);
+}
+
+.text__secondary {
+  margin: var(--space-stack-m);
+}

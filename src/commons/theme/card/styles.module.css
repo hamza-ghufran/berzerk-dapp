@@ -1,0 +1,15 @@
+.root {
+    --card--box-shadow: 2px 3px 23px rgba(0, 0, 0, 0.1);
+}
+
+.container {
+    padding: 1em;
+    display: flex;
+    transition: 0.2s;
+    background: white;
+    transform-style: preserve-3d;
+    box-shadow: var(--card--box-shadow);
+    border-radius: var(--theme-border-radius);
+}
+
+/* The style below is just for the appearance of the example div */
