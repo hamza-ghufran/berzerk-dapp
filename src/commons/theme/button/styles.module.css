@@ -1,0 +1,16 @@
+.root {
+  --primary-color: #ef6768;
+  --hover-color: #ef6768d1;
+
+  --btn-side-pad: 1.6rem;
+  --btn-border-radius: 8px;
+  --btn-min-width: 120px;
+}
+
+.root button:hover {
+  background-image: linear-gradient(to bottom, var(--hover-color), var(--hover-color)) !important;
+}
+
+.secondaryBtn button:hover {
+  color: white !important;
+}

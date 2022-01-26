@@ -1,12 +1,10 @@
 :root {
-  --fs-h1: 60px;
-  --fs-h2: 48px;
-  --fs-h3: 36px;
-  --fs-h4: 30px;
-  --fs-h6: 24px;
-  --fs-h7: 18px;
-  --fs-h8: 16px;
-  --fs-h9: 10px;
+  --fs-h1: 48px;
+  --fs-h2: 36px;
+  --fs-h3: 30px;
+  --fs-h4: 24px;
+  --fs-h5: 18px;
+  --fs-h6: 14px;
 }
 
 h1 {
@@ -33,16 +31,19 @@ h3 {
 h4 {
   color: var(--text-dark);
   font-weight: 400;
-  font-size: 12px;
+  font-size: var(--fs-h4);
 }
 
 h5 {
-  font-size: 8px;
-  /**TODO*/
+  font-size: var(--fs-h5);
+  color: var(--text-dark);
+  font-weight: 400;
 }
+
 h6 {
-  font-size: 6px;
-  /**TODO*/
+  font-size: var(--fs-h6);
+  color: var(--text-dark);
+  font-weight: 400;
 }
 
 p {
@@ -62,7 +63,6 @@ small {
 }
 
 .muted {
-  font-size: 14px;
   color: var(--text-muted);
 }
 
@@ -73,7 +73,7 @@ small {
 
 .bold {
   color: var(--text-dark);
-  font-weight: 600;
+  font-weight: 500;
 }
 
 /* Large Devices, Wide Screens */

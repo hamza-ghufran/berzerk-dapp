@@ -1,12 +1,18 @@
+.root{
+  --img-container-border-color: #e7e7e7;
+  --img-size: 480px
+}
+
 .root {
   display: flex;
   justify-content: flex-end;
 }
 
-
 .img_container {
-  height: 520px;
-  width: 520px;
+  width: var(--img-size);
+  height: var(--img-size);
+  border-radius: var(--theme-border-radius);
+  box-shadow: 0px 0px 0px 1px var( --img-container-border-color);
 }
 
 .banner {

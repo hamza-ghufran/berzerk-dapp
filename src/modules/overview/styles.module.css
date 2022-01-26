@@ -12,19 +12,16 @@
 }
 
 .content {
-  margin: 0 auto;
-  max-width: min(1280px, 100% - 40px);
   width: 100%;
+  margin: 0 auto;
   flex-wrap: wrap;
-}
-
-.section {
-  margin: var(--space-stack-l);
+  max-width: min(1140px, 100% - 40px);
 }
 
 .content__inline {
   display: flex;
   align-items: center;
+  margin: var(--space-stack-xl);
 }
 
 .content__inline>*+* {
@@ -33,6 +30,14 @@
 
 .content__inline>section {
   flex: 1;
+}
+
+.statement {
+  margin: var(--space-stack-m);
+}
+
+.action {
+  display: flex;
 }
 
 /* Large Devices, Wide Screens */

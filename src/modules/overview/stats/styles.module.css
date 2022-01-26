@@ -1,0 +1,20 @@
+.root {}
+
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.stat {
+  flex: 0 0 auto;
+  width: 25%;
+  border-radius: 48px;
+  text-transform: uppercase;
+}
+
+.text__title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-light);
+}
