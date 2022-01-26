@@ -1,0 +1,153 @@
+/****** General Styles *********/
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+html,
+body {
+  font-size: 14px;
+}
+
+body {
+  line-height: 1.5;
+  box-sizing: border-box;
+  background-color: var(--body-bg);
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Ubuntu, sans-serif;
+}
+
+/****** vendor prefixes *********/
+
+/**
+
+iOS: -webkit-
+
+Safari: -webkit-
+
+Firefox: -moz-
+
+Chrome: -webkit-
+
+Opera: -o-
+
+**/
+
+/** Theme Elevated card style */
+
+.elevated-block {
+  box-shadow: var(--theme-box-shadow);
+  border-radius: var(--theme-border-radius);
+  padding: var(--theme--elevated-block--space-inset);
+}
+
+.__centerAlign {
+  display: flex;
+  gap: var(--space-s);
+  align-items: center;
+}
+
+.section__btnContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/** 
+ * Input fields inline style 
+ */
+
+.field-inline {
+  display: flex;
+  align-items: baseline;
+}
+
+.field-inline > div {
+  flex: 1;
+}
+
+.field-inline > * + * {
+  margin: 0 0 0 var(--space-m);
+}
+
+/** Table loading body animation */
+
+@keyframes table-placeholder-shimmer {
+  0% {
+    background-position: -468px 0;
+  }
+
+  100% {
+    background-position: 468px 0;
+  }
+}
+
+/** React Calender */
+
+div.react-calendar {
+  border: none;
+  font-size: 0.81em;
+  font-family: inherit;
+
+  .react-calendar__navigation {
+    font-size: 1.2em;
+    height: 42px;
+    margin-bottom: 0em;
+  }
+
+  .react-calendar__tile {
+    padding: 0.8em 0.4em;
+  }
+
+  .react-calendar__tile--now {
+    background: #cdeff4;
+  }
+
+  .react-calendar__tile--now:enabled:hover,
+  .react-calendar__tile--now:enabled:focus {
+    background: #baeff7;
+  }
+
+  .react-calendar__tile--active {
+    background: linear-gradient(to bottom, #0788de, #116ab8);
+  }
+
+  .react-calendar__tile--active:enabled:hover,
+  .react-calendar__tile--active:enabled:focus {
+    background: linear-gradient(to bottom, #0679c5, #0f5da1);
+  }
+
+  .react-calendar__month-view__days__day--weekend {
+    color: #222;
+  }
+
+  .react-calendar__tile--active {
+    color: white;
+  }
+
+  .react-calendar__tile--hasActive {
+    background: var(#f9f9f9);
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  html,
+  body {
+    font-size: 12px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .field-inline {
+    display: block;
+    margin: var(--field--space-stack);
+  }
+
+  .field-inline > * + * {
+    margin: initial;
+  }
+}

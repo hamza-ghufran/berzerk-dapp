@@ -1,0 +1,112 @@
+:root {
+  --fs-h1: 24px;
+  --fs-h2: 17px;
+  --fs-h3: 16px;
+}
+
+h1 {
+  font-weight: 400;
+  line-height: 0.8;
+  font-size: var(--fs-h1);
+  color: var(--text-dark);
+}
+
+h2 {
+  color: var(--text-dark);
+  font-weight: 600;
+  font-size: var(--fs-h2);
+  line-height: 0.9;
+}
+
+h3 {
+  line-height: 0.9;
+  font-weight: 400;
+  font-size: var(--fs-h3);
+  color: var(--text-dark);
+}
+
+h4 {
+  color: var(--text-dark);
+  font-weight: 400;
+  font-size: 12px;
+}
+
+h5 {
+  font-size: 8px;
+  /**TODO*/
+}
+h6 {
+  font-size: 6px;
+  /**TODO*/
+}
+
+p {
+  color: var(--text-light);
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: -0.05px;
+  line-height: 21px;
+}
+
+small {
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 16px;
+}
+
+.muted {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.light {
+  color: var(--text-light);
+  font-weight: 500;
+}
+
+.bold {
+  color: var(--text-dark);
+  font-weight: 600;
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (max-width: 1200px) {
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (max-width: 992px) {
+  :root {
+    --fs-h1: 23px;
+    --fs-h2: 16px;
+    --fs-h3: 15px;
+  }
+}
+
+/* Small Devices, Tablets */
+@media only screen and (max-width: 768px) {
+  :root {
+    --fs-h1: 22px;
+    --fs-h2: 15px;
+    --fs-h3: 14px;
+  }
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (max-width: 480px) {
+  :root {
+    --fs-h1: 20px;
+    --fs-h2: 14px;
+    --fs-h3: 13px;
+  }
+}
+
+/* Custom, iPhone Retina */
+@media only screen and (max-width: 320px) {
+  :root {
+    --fs-h1: 20px;
+    --fs-h2: 13px;
+    --fs-h3: 13px;
+  }
+}
