@@ -10,23 +10,25 @@ function App() {
   const [config, setConfig] = useState<CONFIG | null>();
 
   const getConfig = async () => {
-    const configResponse = await fetch("/config/config.json", {
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    });
-    const config = await configResponse.json();
-
+    // call store method
+    // set from store method
     setConfig(config);
   };
 
+  const getData = () => {
+    if (blockchain.account !== "" && blockchain.smartContract !== null) {
+      dispatch(fetchData(blockchain.account));
+    }
+  };
 
   useEffect(() => {
     getConfig()
   }, [])
 
-  console.log(config)
+  useEffect(() => {
+    getData();
+  }, [blockchain.account]);
+
   return (
     <div className={styles.root}>
       <main className={styles.main}>

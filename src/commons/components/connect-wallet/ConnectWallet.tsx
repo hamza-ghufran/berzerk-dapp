@@ -28,39 +28,7 @@ function ConnectWallet(props: Props) {
   const [provider, setProvider] = useState<any>(null);
 
   const connectWalletHandler = async () => {
-    const { ethereum } = window;
-    const isMetaMaskInstalled = ethereum && ethereum.isMetaMask;
-
-    if (!isMetaMaskInstalled) {
-      console.log('Need to install MetaMask');
-      //todo show pop up
-      setErrorMessage('Please install MetaMask browser extension to interact');
-      return
-    }
-
-    if (ethereum && !defaultAccount) {
-      const web3 = new ethers.providers.Web3Provider(ethereum)
-      // set ethers provider
-      setProvider(web3);
-
-      try {
-        const account = await ethereum.request({ method: 'eth_requestAccounts' })
-        // const networkId = await ethereum.request({ method: "net_version" });
-
-        setDefaultAccount(account[0])
-
-        ethereum.on("accountsChanged", (accounts: any) => {
-          setDefaultAccount(accounts[0])
-        });
-
-        ethereum.on("chainChanged", () => {
-          window.location.reload();
-        });
-      }
-      catch (error: any) {
-        setErrorMessage(error.message);
-      }
-    }
+   // call store method
   }
 
   useEffect(() => {
