@@ -1,0 +1,17 @@
+{
+  "CONTRACT_ADDRESS": "0x6e4ed165639dbD92E7EFc2649ad9BE8c9a089f7a",
+  "SCAN_LINK": "https://rinkeby.etherscan.io/address/0x6e4ed165639dbD92E7EFc2649ad9BE8c9a089f7a#writeContract",
+  "NETWORK": {
+    "NAME": "Ethereum",
+    "SYMBOL": "ETH",
+    "ID": 4
+  },
+  "NFT_NAME": "BererkArt",
+  "SYMBOL": "∫",
+  "MAX_SUPPLY": 10,
+  "WEI_COST": 50000000000000000,
+  "DISPLAY_COST": 0.05,
+  "GAS_LIMIT": 285000,
+  "MARKETPLACE": "Opeansea",
+  "MARKETPLACE_LINK": "https://testnets.opensea.io/collection/berzerkart"
+}

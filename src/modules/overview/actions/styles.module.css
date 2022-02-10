@@ -1,0 +1,8 @@
+.root>* {
+  margin: var(--space-stack-m);
+}
+
+.section__info {
+}
+
+.section__action {}

@@ -1,9 +1,8 @@
 import React from 'react'
 
-import { Action } from 'commons/components'
-
 import Stats from './stats/Stats'
 import Banner from './banner/Banner'
+import Actions from './actions/Actions'
 import Statement from './statement/Statement'
 
 import styles from './styles.module.css'
@@ -17,7 +16,7 @@ function Overview() {
             <Statement />
           </div>
           <div className={styles.action}>
-            <Action />
+            <Actions />
           </div>
         </section>
         <section className={styles.section__banner}>

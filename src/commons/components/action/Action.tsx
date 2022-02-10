@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
-import { ConnectWallet } from 'modules/connect-wallet'
-import { Mint } from 'modules/mint'
+import { ConnectWallet } from 'commons/components/connect-wallet'
+import { Mint } from 'commons/components/mint'
 
 /**
  * 

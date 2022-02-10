@@ -1,8 +1,9 @@
 import React from 'react'
 
-import { Card } from 'commons/theme'
-
 import styles from './styles.module.css'
+
+const CONFIG = { MAX_SUPPLY: 10 }
+const data = { totalSupply: 1 }
 
 interface StatsProps {
   title: string;
@@ -31,10 +32,10 @@ function Stats() {
         <StatContent title="Current Mint Price" value={0} />
       </div>
       <div className={styles.stat}>
-        <StatContent title="Total Supply" value={0} />
+        <StatContent title="Total Supply" value={CONFIG.MAX_SUPPLY} />
       </div>
       <div className={styles.stat}>
-        <StatContent title="Minted" value={'0/0'} />
+        <StatContent title="Minted" value={`${data.totalSupply} / ${CONFIG.MAX_SUPPLY}`} />
       </div>
     </div>
   </div>
