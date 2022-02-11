@@ -1,6 +1,4 @@
-- read data from smart contract
 - check if smart contract is being initialized correctly
 - refactor of methods in store
-- check into how to show data without account connections
 - read on signers
 - lastly, the mint function

@@ -128,12 +128,12 @@ class BlockChainStore {
 
   public setupContract = async () => {
     // handle error and popup
-    if (!this.defaultAccount) return
+    if (!this.config) return
     if (!this.abi) return
     if (!this.provider) this.getProvider()
 
     try {
-      const berzerkContract = new ethers.Contract(this.defaultAccount, this.abi, this.provider)
+      const berzerkContract = new ethers.Contract(this.config!.CONTRACT_ADDRESS, this.abi, this.provider)
       this.setContract(berzerkContract)
     }
     catch (e) {

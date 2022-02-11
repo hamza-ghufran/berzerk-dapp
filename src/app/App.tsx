@@ -1,6 +1,4 @@
-import type { CONFIG } from 'local-types'
-
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect } from "react";
 import { inject, observer } from 'mobx-react';
 
 import { Overview } from "modules/overview";
@@ -18,19 +16,12 @@ function App(props: Props) {
   const fetchRequiredData = useCallback(async () => {
     await blockchainStore.getConfig()
     await blockchainStore.getAbi()
-  }, [blockchainStore])
-
-  const setupContract = useCallback(() => {
     blockchainStore.setupContract()
-  }, [blockchainStore]);
+  }, [blockchainStore])
 
   useEffect(() => {
     fetchRequiredData()
   }, [fetchRequiredData])
-
-  useEffect(() => {
-    setupContract()
-  }, [setupContract, blockchainStore.defaultAccount])
 
   return (
     <div className={styles.root}>

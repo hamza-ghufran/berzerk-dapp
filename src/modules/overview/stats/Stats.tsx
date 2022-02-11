@@ -1,8 +1,9 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { observer, inject } from 'mobx-react'
 
-import styles from './styles.module.css'
 import { AppStore } from 'commons/stores'
+
+import styles from './styles.module.css'
 
 interface StatsProps {
   title: string;
@@ -35,7 +36,8 @@ function Stats(props: Props) {
 
   const fetchTotalSupply = useCallback(async () => {
     try {
-
+      const result = await blockchainStore?.contract?.totalSupply()
+      setTotalSupply(result)
     }
     catch (e) {
       console.log(e)
@@ -44,15 +46,13 @@ function Stats(props: Props) {
 
   useEffect(() => {
     fetchTotalSupply()
-  }, [fetchTotalSupply, blockchainStore.defaultAccount])
+  }, [fetchTotalSupply, blockchainStore.contract])
 
   const maxSuppply = blockchainStore.config?.MAX_SUPPLY
   const mintPrice = blockchainStore.config?.DISPLAY_COST
   const symbol = blockchainStore.config?.NETWORK.SYMBOL
 
   const loading = '...'
-
-  console.log(totalSupply)
 
   return <div className={styles.root}>
     <div className={styles.stats}>
@@ -63,7 +63,7 @@ function Stats(props: Props) {
         <StatContent title="Total Supply" value={maxSuppply || loading} />
       </div>
       <div className={styles.stat}>
-        <StatContent title="Minted" value={`${totalSupply} / ${maxSuppply || loading}`} />
+        <StatContent title="Minted" value={`${totalSupply || loading} / ${maxSuppply || loading}`} />
       </div>
     </div>
   </div>
