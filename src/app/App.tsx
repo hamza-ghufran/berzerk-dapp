@@ -1,33 +1,36 @@
 import type { CONFIG } from 'local-types'
 
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
+import { inject, observer } from 'mobx-react';
 
 import { Overview } from "modules/overview";
+import { AppStore } from 'commons/stores';
 
 import styles from './styles.module.css'
 
-function App() {
-  const [config, setConfig] = useState<CONFIG | null>();
+interface Props {
+  store?: AppStore
+}
 
-  const getConfig = async () => {
-    // call store method
-    // set from store method
-    setConfig(config);
-  };
+function App(props: Props) {
+  const blockchainStore = props.store!.blockchain
 
-  const getData = () => {
-    if (blockchain.account !== "" && blockchain.smartContract !== null) {
-      dispatch(fetchData(blockchain.account));
-    }
-  };
+  const fetchRequiredData = useCallback(async () => {
+    await blockchainStore.getConfig()
+    await blockchainStore.getAbi()
+  }, [blockchainStore])
 
-  useEffect(() => {
-    getConfig()
-  }, [])
+  const setupContract = useCallback(() => {
+    blockchainStore.setupContract()
+  }, [blockchainStore]);
 
   useEffect(() => {
-    getData();
-  }, [blockchain.account]);
+    fetchRequiredData()
+  }, [fetchRequiredData])
+
+  useEffect(() => {
+    setupContract()
+  }, [setupContract, blockchainStore.defaultAccount])
 
   return (
     <div className={styles.root}>
@@ -38,4 +41,4 @@ function App() {
   )
 }
 
-export default App
+export default inject('store')(observer(App))

@@ -1,9 +1,8 @@
-import React from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
+import { observer, inject } from 'mobx-react'
 
 import styles from './styles.module.css'
-
-const CONFIG = { MAX_SUPPLY: 10 }
-const data = { totalSupply: 1 }
+import { AppStore } from 'commons/stores'
 
 interface StatsProps {
   title: string;
@@ -25,20 +24,49 @@ function StatContent(props: StatsProps) {
   )
 }
 
-function Stats() {
+interface Props {
+  store?: AppStore
+}
+
+function Stats(props: Props) {
+  const blockchainStore = props.store!.blockchain
+
+  const [totalSupply, setTotalSupply] = useState()
+
+  const fetchTotalSupply = useCallback(async () => {
+    try {
+
+    }
+    catch (e) {
+      console.log(e)
+    }
+  }, [blockchainStore])
+
+  useEffect(() => {
+    fetchTotalSupply()
+  }, [fetchTotalSupply, blockchainStore.defaultAccount])
+
+  const maxSuppply = blockchainStore.config?.MAX_SUPPLY
+  const mintPrice = blockchainStore.config?.DISPLAY_COST
+  const symbol = blockchainStore.config?.NETWORK.SYMBOL
+
+  const loading = '...'
+
+  console.log(totalSupply)
+
   return <div className={styles.root}>
     <div className={styles.stats}>
       <div className={styles.stat}>
-        <StatContent title="Current Mint Price" value={0} />
+        <StatContent title="Current Mint Price" value={`${mintPrice || loading} ${symbol}`} />
       </div>
       <div className={styles.stat}>
-        <StatContent title="Total Supply" value={CONFIG.MAX_SUPPLY} />
+        <StatContent title="Total Supply" value={maxSuppply || loading} />
       </div>
       <div className={styles.stat}>
-        <StatContent title="Minted" value={`${data.totalSupply} / ${CONFIG.MAX_SUPPLY}`} />
+        <StatContent title="Minted" value={`${totalSupply} / ${maxSuppply || loading}`} />
       </div>
     </div>
   </div>
 }
 
-export default Stats
+export default inject('store')(observer(Stats))

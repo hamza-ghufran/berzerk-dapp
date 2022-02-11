@@ -1,17 +1,33 @@
-import React from 'react'
+import type { AppStore } from 'commons/stores'
 
-import { Action } from 'commons/components'
+import React from 'react'
+import { observer, inject } from 'mobx-react'
+
+import { ConnectWallet, Mint } from 'commons/components'
 
 import styles from './styles.module.css'
 
-function Actions() {
+/**
+ * 
+ * This should check if an account is connected
+ * Based on the condition, display connect
+ * or dispklay mint button
+ */
+
+interface Props {
+  store?: AppStore
+}
+
+function Actions(props: Props) {
+  const blockchainStore = props.store!.blockchain
+
   return (
     <div className={styles.root}>
       <section className={styles.section__action}>
-        <Action />
+        {blockchainStore.defaultAccount ? <Mint></Mint> : <ConnectWallet />}
       </section>
     </div>
   )
 }
 
-export default Actions
+export default inject('store')(observer(Actions))

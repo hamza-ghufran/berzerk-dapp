@@ -1,14 +1,21 @@
+import type { Contract } from 'ethers'
+
 import type { CONFIG } from 'local-types'
 
 import { ethers } from "ethers";
+import { action, makeObservable, observable } from 'mobx';
 
-class BlockChain {
-  public config: CONFIG | null = null
+import RootStore from './root';
 
-  public berzerkContract = null
+class BlockChainStore {
+  private rootStore: RootStore;
 
-  public setContract(contract: any) {
-    this.berzerkContract = contract
+  @observable
+  public contract: Contract | null = null
+
+  @action.bound
+  public setContract(contract: Contract) {
+    this.contract = contract
   }
 
   public get ethereum() {
@@ -16,10 +23,15 @@ class BlockChain {
     return ethereum
   }
 
+  @observable
+  public config: CONFIG | null = null
+
+  @action.bound
   public setConfig(config: CONFIG) {
     this.config = config
   }
 
+  @action.bound
   public getConfig = async () => {
     const configResponse = await fetch("/config/config.json", {
       headers: {
@@ -28,15 +40,19 @@ class BlockChain {
       },
     });
     const config = await configResponse.json();
+    this.setConfig(config)
     return config
   }
 
+  @observable
   public abi: any
 
+  @action.bound
   public setAbi = async (abi: any) => {
-    this.abi = abi
+    this.abi = abi.abi
   }
 
+  @action.bound
   public getAbi = async () => {
     const abiResponse = await fetch("/config/abi.json", {
       headers: {
@@ -45,6 +61,7 @@ class BlockChain {
       },
     });
     const abi = await abiResponse.json();
+    this.setAbi(abi)
     return abi
   }
 
@@ -55,8 +72,10 @@ class BlockChain {
     this.provider = provider
   }
 
-  public defaultAccount: any
+  @observable
+  public defaultAccount: any = null
 
+  @action.bound
   public setDefaultAccount(account: any) {
     this.defaultAccount = account
   }
@@ -76,7 +95,14 @@ class BlockChain {
     });
   }
 
-  public connectWallet = async () => {
+  @action.bound
+  public getProvider() {
+    const web3 = new ethers.providers.Web3Provider(this.ethereum)
+    this.setProvider(web3);
+  }
+
+  @action.bound
+  public async connectWallet() {
     const isMetaMaskInstalled = this.ethereum && this.ethereum.isMetaMask;
 
     if (!isMetaMaskInstalled) {
@@ -87,10 +113,7 @@ class BlockChain {
       return
     }
 
-    // if account set return
-
-    const web3 = new ethers.providers.Web3Provider(this.ethereum)
-    this.setProvider(web3);
+    if (this.defaultAccount) return
 
     try {
       const accounts = await this.fetchAccounts()
@@ -98,6 +121,7 @@ class BlockChain {
       this.setListeners()
     }
     catch (error: any) {
+      console.log(error)
       // call store method alert and set message
     }
   }
@@ -106,10 +130,15 @@ class BlockChain {
     // handle error and popup
     if (!this.defaultAccount) return
     if (!this.abi) return
-    if (!this.provider) return
+    if (!this.provider) this.getProvider()
 
-    const berzerkContract = new ethers.Contract(this.defaultAccount, this.abi, this.provider)
-    this.setContract(berzerkContract)
+    try {
+      const berzerkContract = new ethers.Contract(this.defaultAccount, this.abi, this.provider)
+      this.setContract(berzerkContract)
+    }
+    catch (e) {
+      console.log(e)
+    }
 
     // if (networkId == CONFIG.NETWORK.ID) {
     //   // Add listeners start
@@ -118,6 +147,12 @@ class BlockChain {
     //   dispatch(connectFailed(`Change network to ${CONFIG.NETWORK.NAME}.`));
     // }
   }
+
+  constructor(rootStore: RootStore) {
+    this.rootStore = rootStore;
+    makeObservable(this)
+  }
+
 }
 
-export { BlockChain }
+export { BlockChainStore }

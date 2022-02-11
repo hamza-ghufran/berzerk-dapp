@@ -1,3 +1,4 @@
-import Action from './action/Action'
+import ConnectWallet from './connect-wallet/ConnectWallet'
+import Mint from './mint/Mint'
 
-export { Action }
+export { ConnectWallet, Mint }

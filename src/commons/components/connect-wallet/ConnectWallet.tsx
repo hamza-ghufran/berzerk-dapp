@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import type { AppStore } from 'commons/stores';
 
-import { ethers } from "ethers";
+import React from 'react'
+import { inject, observer } from 'mobx-react';
 
 import { Button } from 'commons/theme'
-
-// import styles from './styles.module.css'
 
 // todo move to better location
 declare global {
@@ -14,37 +13,24 @@ declare global {
 }
 
 interface Props {
+  store?: AppStore
   text?: string
   width?: number
   height?: number
-  setAccount: (acct: string) => void
 }
 
 function ConnectWallet(props: Props) {
-  const { setAccount } = props
-
-  const [errorMessage, setErrorMessage] = useState<null | string>(null);
-  const [defaultAccount, setDefaultAccount] = useState(null);
-  const [provider, setProvider] = useState<any>(null);
+  const blockchainStore = props.store!.blockchain
 
   const connectWalletHandler = async () => {
-   // call store method
+    await blockchainStore.connectWallet()
   }
 
-  useEffect(() => {
-    if (defaultAccount) {
-      setAccount(defaultAccount)
-    };
-  }, [defaultAccount, setAccount]);
-
   return (
-    <div>
-      <Button onClick={connectWalletHandler} width="100%" height="3rem">
-        Connect Wallet
-      </Button>
-      {errorMessage}
-    </div>
+    <Button onClick={connectWalletHandler} width="100%" height="3rem">
+      Connect Wallet
+    </Button>
   );
 }
 
-export default ConnectWallet;
+export default inject('store')(observer(ConnectWallet))
