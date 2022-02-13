@@ -1,16 +1,27 @@
-import React from "react";
+import type { AppStore } from "commons/stores";
+
+import React, { useCallback } from "react";
+import { observer, inject } from "mobx-react";
 
 import { Button } from 'commons/theme'
 
-function Mint() {
-  // functionality of minting
-  // and a button to do so
-  // the mint could be customized by passing props
+interface Props {
+  store?: AppStore
+}
+
+function Mint(props: Props) {
+  const blockchainStore = props.store!.blockchain
+
+  const mintNft = useCallback(async () => {
+    await blockchainStore.mint()
+    alert('MINTED')
+  }, [blockchainStore])
+
   return <div>
-    <Button width="100%" height="3rem">
+    <Button onClick={() => mintNft()} width="100%" height="3rem">
       Mint
     </Button>
   </div>
 }
 
-export default Mint
+export default inject('store')(observer(Mint))

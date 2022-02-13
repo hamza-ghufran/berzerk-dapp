@@ -65,11 +65,18 @@ class BlockChainStore {
     return abi
   }
 
+  @observable
   public provider: any
 
-  // set ethers provider
+  @action.bound
   public setProvider(provider: any) {
     this.provider = provider
+  }
+
+  @action.bound
+  public getProvider() {
+    const web3 = new ethers.providers.Web3Provider(this.ethereum)
+    this.setProvider(web3);
   }
 
   @observable
@@ -93,12 +100,6 @@ class BlockChainStore {
     this.ethereum.on("chainChanged", () => {
       window.location.reload();
     });
-  }
-
-  @action.bound
-  public getProvider() {
-    const web3 = new ethers.providers.Web3Provider(this.ethereum)
-    this.setProvider(web3);
   }
 
   @action.bound
@@ -133,7 +134,8 @@ class BlockChainStore {
     if (!this.provider) this.getProvider()
 
     try {
-      const berzerkContract = new ethers.Contract(this.config!.CONTRACT_ADDRESS, this.abi, this.provider)
+      const signer = this.provider.getSigner()
+      const berzerkContract = new ethers.Contract(this.config!.CONTRACT_ADDRESS, this.abi, signer)
       this.setContract(berzerkContract)
     }
     catch (e) {
@@ -146,6 +148,21 @@ class BlockChainStore {
     // } else {
     //   dispatch(connectFailed(`Change network to ${CONFIG.NETWORK.NAME}.`));
     // }
+  }
+
+  @action.bound
+  public async mint() {
+    if (!this.contract) return
+    if (!this.config) return
+
+    const nftTxn = await this.contract.mint(1)
+
+    console.log('---minting---')
+
+    const tx = await nftTxn.wait()
+
+    console.log('minted', tx)
+    console.log(`Mined, see transaction: https://rinkeby.etherscan.io/tx/${nftTxn.hash}`)
   }
 
   constructor(rootStore: RootStore) {
